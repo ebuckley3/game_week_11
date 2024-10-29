@@ -35,6 +35,7 @@
             function draw() {
                 background(bgImage);
                 displayCoordinates();
+                drawInteractiveZones(); // Draw bounding boxes to debug the interactive areas
             }
 
             function displayCoordinates() {
@@ -42,6 +43,19 @@
                 textSize(16);
                 textAlign(LEFT, BOTTOM);
                 text(`x: ${mouseX}, y: ${mouseY}`, 10, height - 10);
+            }
+
+            function drawInteractiveZones() {
+                noFill();
+                stroke(255, 0, 0);
+                strokeWeight(2);
+                
+                // Draw bounding boxes for debugging purposes
+                rect(400, 100, 200, 150);  // Hair
+                rect(400, 300, 200, 100);  // Beard
+                rect(300, 450, 400, 250);  // Clothes
+                rect(350, 700, 300, 250);  // Legs
+                rect(420, 150, 160, 50);   // Eyebrows
             }
 
             function mousePressed() {
