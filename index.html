@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5.js Game - Catch the Squares</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #game-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <script>
+            let circleX, circleY, circleSize;
+            let squareX, squareY, squareSize;
+            let score = 0;
+            let bgImage;
+            
+            function preload() {
+                bgImage = loadImage('gingerbreadman.png');
+            }
+            
+            function setup() {
+                createCanvas(1000, 1000).parent('game-container');
+                circleX = width / 2;
+                circleY = height / 2;
+                circleSize = 50;
+                squareSize = 40;
+                resetSquare();
+            }
+            
+            function draw() {
+                background(bgImage);
+                fill(0, 102, 153);
+                ellipse(circleX, circleY, circleSize);
+                fill(255, 0, 0);
+                rect(squareX, squareY, squareSize, squareSize);
+                moveSquare();
+                checkCollision();
+                drawScore();
+            }
+
+            function keyPressed() {
+                let stepSize = 10;
+                if (keyCode === LEFT_ARROW) {
+                    circleX -= stepSize;
+                } else if (keyCode === RIGHT_ARROW) {
+                    circleX += stepSize;
+                } else if (keyCode === UP_ARROW) {
+                    circleY -= stepSize;
+                } else if (keyCode === DOWN_ARROW) {
+                    circleY += stepSize;
+                }
+            }
+
+            function resetSquare() {
+                squareX = random(width - squareSize);
+                squareY = random(height - squareSize);
+            }
+
+            function moveSquare() {
+                squareX += random(-2, 2);
+                squareY += random(-2, 2);
+                squareX = constrain(squareX, 0, width - squareSize);
+                squareY = constrain(squareY, 0, height - squareSize);
+            }
+
+            function checkCollision() {
+                let distance = dist(circleX, circleY, squareX + squareSize / 2, squareY + squareSize / 2);
+                if (distance < (circleSize + squareSize) / 2) {
+                    score++;
+                    resetSquare();
+                }
+            }
+
+            function drawScore() {
+                fill(0);
+                textSize(24);
+                textAlign(LEFT, TOP);
+                text(`Score: ${score}`, 10, 10);
+            }
+        </script>
+    </div>
+</body>
+</html>
