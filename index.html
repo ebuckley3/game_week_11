@@ -17,10 +17,36 @@
         #game-container {
             text-align: center;
         }
+        #custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        #custom-alert button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="game-container">
+        <div id="custom-alert">
+            <div id="alert-text"></div>
+            <button onclick="closeCustomAlert()">OK</button>
+        </div>
         <script>
             let bgImage;
             
@@ -63,14 +89,26 @@
 
             function mousePressed() {
                 if (isInHair(mouseX, mouseY)) {
-                    alert("Toughness and Emotional Stoicism\n\nThe hair can represent the expectation for men to appear strong, both physically and emotionally. This means not showing vulnerability, not crying, and always keeping composure, with a hairstyle that looks \"neat and powerful,\" whether clean-cut or styled to convey confidence and control.");
+                    customAlert("Toughness and Emotional Stoicism\n\nThe hair can represent the expectation for men to appear strong, both physically and emotionally. This means not showing vulnerability, not crying, and always keeping composure, with a hairstyle that looks \"neat and powerful,\" whether clean-cut or styled to convey confidence and control.");
                 } else if (isInBeard(mouseX, mouseY)) {
-                    alert("Symbol of Dominance and Virility\n\nThe beard, in the context of hegemonic masculinity, often symbolizes maturity, dominance, and traditional masculinity. Facial hair is typically seen as a marker of virility and strength, encouraging men to \"grow a beard\" as a way of signaling their conformity to masculine ideals of power, ruggedness, and sexual appeal.");
+                    customAlert("Symbol of Dominance and Virility\n\nThe beard, in the context of hegemonic masculinity, often symbolizes maturity, dominance, and traditional masculinity. Facial hair is typically seen as a marker of virility and strength, encouraging men to \"grow a beard\" as a way of signaling their conformity to masculine ideals of power, ruggedness, and sexual appeal.");
                 } else if (isInClothes(mouseX, mouseY)) {
-                    alert("Provider, Protector, and Breadwinner\n\nThe clothes can represent professional attire that symbolizes expectations of men as the primary earners or providers, tying into their role as the economic backbone of the family. Clothing could include elements such as a suit or uniform, which conveys authority, capability, and a sense of responsibility. It also implies men’s need to conform to societal pressures of being successful and hardworking.");
+                    customAlert("Provider, Protector, and Breadwinner\n\nThe clothes can represent professional attire that symbolizes expectations of men as the primary earners or providers, tying into their role as the economic backbone of the family. Clothing could include elements such as a suit or uniform, which conveys authority, capability, and a sense of responsibility. It also implies men’s need to conform to societal pressures of being successful and hardworking.");
                 } else if (isInLegs(mouseX, mouseY)) {
-                    alert("Physical Strength and Athleticism\n\nThe legs can represent expectations related to physical strength, athleticism, and dominance in space. Men are often encouraged to take up more physical space as a demonstration of power, and strong, muscular legs could symbolize the pressure to be physically fit, athletic, and capable of defending themselves or others. This relates to the way men are taught to demonstrate physical prowess as a key part of their masculine identity.");
+                    customAlert("Physical Strength and Athleticism\n\nThe legs can represent expectations related to physical strength, athleticism, and dominance in space. Men are often encouraged to take up more physical space as a demonstration of power, and strong, muscular legs could symbolize the pressure to be physically fit, athletic, and capable of defending themselves or others. This relates to the way men are taught to demonstrate physical prowess as a key part of their masculine identity.");
                 }
+            }
+
+            function customAlert(message) {
+                const alertBox = document.getElementById('custom-alert');
+                const alertText = document.getElementById('alert-text');
+                alertText.innerHTML = message + '<br><br><a href="https://ebuckley3.github.io/toxic-masculinity/" target="_blank" style="color: white; text-decoration: underline;">Click here to take the Toxic Masculinity Traits Survey</a>';
+                alertBox.style.display = 'block';
+            }
+
+            function closeCustomAlert() {
+                const alertBox = document.getElementById('custom-alert');
+                alertBox.style.display = 'none';
             }
 
             function isInHair(x, y) {
@@ -96,7 +134,5 @@
     </div>
 </body>
 </html>
-
-
 
 
