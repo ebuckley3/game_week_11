@@ -58,8 +58,6 @@
                     rect(300, 450, 400, 250);  // Clothes
                 } else if (isInLegs(mouseX, mouseY)) {
                     rect(350, 700, 300, 250);  // Legs
-                } else if (isInEyebrows(mouseX, mouseY)) {
-                    rect(420, 150, 160, 50);   // Eyebrows
                 }
             }
 
@@ -72,8 +70,6 @@
                     console.log('Clicked on clothes');
                 } else if (isInLegs(mouseX, mouseY)) {
                     console.log('Clicked on legs');
-                } else if (isInEyebrows(mouseX, mouseY)) {
-                    console.log('Clicked on eyebrows');
                 }
             }
 
@@ -96,9 +92,12 @@
                 // Define the bounding box for the legs
                 return x > 350 && x < 650 && y > 700 && y < 950;
             }
+
+            
         </script>
     </div>
 </body>
 </html>
+
 
 
