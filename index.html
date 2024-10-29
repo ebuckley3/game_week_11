@@ -23,6 +23,7 @@
     <div id="game-container">
         <script>
             let bgImage;
+            let zonesToDraw = []; // Keep track of which zones should be drawn
             
             function preload() {
                 bgImage = loadImage('gingerbreadman.png');
@@ -35,7 +36,7 @@
             function draw() {
                 background(bgImage);
                 displayCoordinates();
-                drawInteractiveZones(); // Draw bounding boxes to debug the interactive areas
+                drawInteractiveZones();
             }
 
             function displayCoordinates() {
@@ -47,28 +48,31 @@
 
             function drawInteractiveZones() {
                 noFill();
-                stroke(255, 0, 0);
+                stroke(255);
                 strokeWeight(2);
                 
-                // Draw bounding boxes for debugging purposes
-                rect(400, 100, 200, 150);  // Hair
-                rect(400, 300, 200, 100);  // Beard
-                rect(300, 450, 400, 250);  // Clothes
-                rect(350, 700, 300, 250);  // Legs
-                rect(420, 150, 160, 50);   // Eyebrows
+                // Draw only the zones that have been clicked
+                for (let zone of zonesToDraw) {
+                    rect(zone.x, zone.y, zone.w, zone.h);
+                }
             }
 
             function mousePressed() {
                 if (isInHair(mouseX, mouseY)) {
                     console.log('Clicked on hair');
+                    zonesToDraw.push({x: 400, y: 100, w: 200, h: 150});
                 } else if (isInBeard(mouseX, mouseY)) {
                     console.log('Clicked on beard');
+                    zonesToDraw.push({x: 400, y: 300, w: 200, h: 100});
                 } else if (isInClothes(mouseX, mouseY)) {
                     console.log('Clicked on clothes');
+                    zonesToDraw.push({x: 300, y: 450, w: 400, h: 250});
                 } else if (isInLegs(mouseX, mouseY)) {
                     console.log('Clicked on legs');
+                    zonesToDraw.push({x: 350, y: 700, w: 300, h: 250});
                 } else if (isInEyebrows(mouseX, mouseY)) {
                     console.log('Clicked on eyebrows');
+                    zonesToDraw.push({x: 420, y: 150, w: 160, h: 50});
                 }
             }
 
@@ -90,11 +94,6 @@
             function isInLegs(x, y) {
                 // Define the bounding box for the legs
                 return x > 350 && x < 650 && y > 700 && y < 950;
-            }
-
-            function isInEyebrows(x, y) {
-                // Define the bounding box for the eyebrows
-                return x > 420 && x < 580 && y > 150 && y < 200;
             }
         </script>
     </div>
