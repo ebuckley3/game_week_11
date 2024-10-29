@@ -43,6 +43,45 @@
                 textAlign(LEFT, BOTTOM);
                 text(`x: ${mouseX}, y: ${mouseY}`, 10, height - 10);
             }
+
+            function mousePressed() {
+                if (isInHair(mouseX, mouseY)) {
+                    console.log('Clicked on hair');
+                } else if (isInBeard(mouseX, mouseY)) {
+                    console.log('Clicked on beard');
+                } else if (isInClothes(mouseX, mouseY)) {
+                    console.log('Clicked on clothes');
+                } else if (isInLegs(mouseX, mouseY)) {
+                    console.log('Clicked on legs');
+                } else if (isInEyebrows(mouseX, mouseY)) {
+                    console.log('Clicked on eyebrows');
+                }
+            }
+
+            function isInHair(x, y) {
+                // Define the bounding box for the hair
+                return x > 400 && x < 600 && y > 100 && y < 250;
+            }
+
+            function isInBeard(x, y) {
+                // Define the bounding box for the beard
+                return x > 400 && x < 600 && y > 300 && y < 400;
+            }
+
+            function isInClothes(x, y) {
+                // Define the bounding box for the clothes
+                return x > 300 && x < 700 && y > 450 && y < 700;
+            }
+
+            function isInLegs(x, y) {
+                // Define the bounding box for the legs
+                return x > 350 && x < 650 && y > 700 && y < 950;
+            }
+
+            function isInEyebrows(x, y) {
+                // Define the bounding box for the eyebrows
+                return x > 420 && x < 580 && y > 150 && y < 200;
+            }
         </script>
     </div>
 </body>
